@@ -1,10 +1,10 @@
 # 路由
 
->路由本质上史操作的history的地址的历史记录
+>路由本质上是操作的history的地址的历史记录
 
 
 
-## SPA应用(single page web application) 
+## SPA应用(single page web application)
 
 1. 整个应用只有一个完整的页面
 2. **点击页面的链接不会刷新页面，只会做页面的局部更新**
@@ -373,7 +373,7 @@ export default class AboutSon2 extends Component {
 
 > 传来的值毫无疑问是在props中，我们来看一下，他在什么位置。
 
-如图可知，在`his.props.match.params;`中。
+如图可知，在`this.props.match.params;`中。
 
 
 
@@ -537,7 +537,7 @@ export default class Details extends Component {
 
 ### **通过search传值：**
 
-这个仅需还是两步走：
+这个仅需两步走：
 
 （1）传值
 
@@ -875,10 +875,6 @@ export default class Details extends Component {
 
 
 
-
-
-
-
 ![mark](http://qiniu.wind-zhou.com/blog/210414/JCf2cCflLG.png?imageslim)
 
 
@@ -937,8 +933,6 @@ replace则会替换每次的历史记录
 手动前进后退
 
 ![mark](http://qiniu.wind-zhou.com/blog/210424/l9070aaHk7.png?imageslim)
-
-
 
 
 

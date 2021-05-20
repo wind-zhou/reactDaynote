@@ -1,6 +1,4 @@
-# react 生命周期
-
-
+# lesson-5 react 生命周期
 
 >推荐阅读;https://zhuanlan.zhihu.com/p/38030418
 
@@ -194,7 +192,7 @@ export default Instance
 
 **作用**：加载时调用一次。可以初始化state
 
-## getDerivedStateFromProps(props,state)
+## getDerivedStateFromProps(newprops,prestate)
 
 ```jsx
 static getDerivedStateFromProps(props, state)
@@ -267,7 +265,56 @@ static getDerivedStateFromProps(props, state)
 
 
 
-
+>补充：fiber架构
+>
+>>https://zhuanlan.zhihu.com/p/26027085
+>
+>## 什么是fiber？
+>
+>官方的一句话解释是“**React Fiber是对核心算法的一次重新实现”**
+>
+>## fiber有什么用？
+>
+>将react的同步更新变成了异步更新。
+>
+>**同步更新的局限**：**同步更新是非阻塞的**，比如调用各个组件的生命周期函数，计算和比对Virtual DOM，最后更新DOM树，这整个过程是同步进行的，也就是说只要一个加载或者更新过程开始，一鼓作气运行到底，中途绝不停歇。这样如果dom嵌套过深（单个任务事件片过长），如果更新过程中用户进行了input输入，则可能会有卡顿的现象。用户体验不好。
+>
+>fiber后的异步更新：破解JavaScript中同步操作时间过长的方法其实很简单——分片。**维护每个时间片的数据结构就是fiber。**
+>
+>他允许更新过程中被打断。
+>
+>
+>
+>## 为什么叫Fiber呢？
+>
+>大家应该都清楚进程（Process）和线程（Thread）的概念，在计算机科学中还有一个概念叫做Fiber，英文含义就是“纤维”，意指比Thread更细的线，也就是比线程(Thread)控制得更精密的并发处理机制。
+>
+>## fiber 的工作原理
+>
+>因为一个更新过程可能被打断，所以**React Fiber一个更新过程被分为两个阶段(Phase)**：第一个阶段Reconciliation Phase和第二阶段Commit Phase。
+>
+>在**第一阶段Reconciliation Phase，React Fiber会找出需要更新哪些DOM，这个阶段是可以被打断的**；但是到了**第二阶段Commit Phase，那就一鼓作气把DOM更新完，绝不会被打断**。
+>
+>这两个阶段大部分工作都是React Fiber做，和我们相关的也就是生命周期函数。
+>
+>以render函数为界，第一阶段可能会调用下面这些生命周期函数，说是“可能会调用”是因为不同生命周期调用的函数不同。
+>
+>- componentWillMount
+>- componentWillReceiveProps
+>- shouldComponentUpdate
+>- componentWillUpdate
+>
+>
+>
+>下面这些生命周期函数则会在第二阶段调用。
+>
+>- componentDidMount
+>- componentDidUpdate
+>- componentWillUnmount
+>
+>在现有的React中，每个生命周期函数在一个加载或者更新过程中绝对只会被调用一次；**在React Fiber中，不再是这样了，第一阶段中的生命周期函数在一次加载和更新过程中可能会被多次调用！**
+>
+>
 
 
 

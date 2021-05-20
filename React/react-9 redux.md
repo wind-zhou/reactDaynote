@@ -71,7 +71,7 @@ Reducer 只是一些纯函数，它接收先前的 state 和 action，并返回�
 
 
 
-Action是把数据从应用传到store的有效载荷。**它是store数据的唯一 来源**。一 般来说会通过`store.dispatch()`将action传到store。
+Action是把数据从应用传到store的有效载荷。**它是store数据的唯一来源**。一 般来说会通过`store.dispatch()`将action传到store。
 
 - ①在Redux中， 我们用**对象来描述行为**
 - ②行为有很多种，为了以示区别，我们给**每个描述行为的对象增加一个type字段**，type字段的值就
@@ -79,7 +79,7 @@ Action是把数据从应用传到store的有效载荷。**它是store数据的�
 - ③无论哪种行为，只要发生了，都会产生几个与该行为相关的最直接最重要的数据。而这些数据也在对象描述行为的范围内，所以添加任务除了type字段外，还需要text字段告诉读者添加了什么任务，也需要id字段方便索引. 
 - ④综上所述，在Redux中，用种有固定格式的对象来描述行为，这种固定格式体现在:①**该对象必须有type字段**②该对象的其他字段不做任何限制，但从道理上讲其他字段不会特别多。如果存在，一定都是行为最精华的细节或数据描述。
 - ⑤在Redux中，我们把这种结构固定的对象取个名字，就叫acion对象
-- ⑥同种行为不太可能只触发次， 所以这才有了acio创建函数。
+- ⑥同种行为不太可能只触发一次， 所以这才有了action创建函数。
 
 
 
@@ -137,9 +137,9 @@ function todoApp(state = initialState, action) { //这里state设定翻译一个
 
 ## store
 
-Store是用来维持应用所有state树的一个对象。 改变state的唯一方法是store dispatch-个action。
+Store是用来维持应用所有state树的一个对象。 改变state的唯一方法是store dispatch一个action。
 
-**Store不是类，而只是一 个有几个方法的对象，可以采用createStore进行创建。**
+**Store不是类，而只是一个有几个方法的对象，可以采用createStore进行创建。**
 
 **创建store：**
 
@@ -306,7 +306,7 @@ action是个普通的avascrp对象, reduce是一个普通的方法。在reducer�
 
 redux本身提供的与功能并不多，但是它提供了一个中间件(插件) 机制， 可以使用第三方提供的中间件或自己编写个中间件来对Redcer的功能进行增强。
 
->reducx 的createStore(reducer，prestate，enhancer)方法的的第三个参数就是预留给中间件的，enhancer本身有提升的意思，可以理解为通过中间件提升store，扩展其功能。
+>reducx 的createStore(reducer，prestate，enhancer)方法的的**第三个参数**就是预留给中间件的，enhancer本身有提升的意思，可以理解为通过中间件提升store，扩展其功能。
 
 
 
@@ -327,7 +327,7 @@ dispatch一个action之后， 到达reducer之前， 进行些额外的操作，
 中间件在创建store对象时就应传入，作为createStore(reducer, enhancer);的第三个参数，具体语法如下：
 
 ```js
-const store=createStore(reducer, astate,pplyMiddleware(thunk));
+const store=createStore(reducer, state,applyMiddleware(thunk));
 ```
 
 上面以引入thunk中间件为例，当然也可以引入多个。
@@ -341,8 +341,6 @@ const store = createStore(
     applyMiddleware(thunk, logger)
 );
 ```
-
-
 
 
 
@@ -371,11 +369,11 @@ import { createStore, applyMiddleware } from "redux";   //导入中间件
 
 #### 原理
 
-通过多参数的柯里化函数以实现对函数的情性求值，从而将同步的action转为异步的action
+**通过多参数的柯里化函数以实现对函数的情性求值，从而将同步的action转为异步的action。**
 
 
 
-> 上面这个解释不是人能听懂的，**简单来说就是允许action是一个函数(同步的action都是一个对象)，然后我们可以在该函数中定义相应的异步操作（像定时器或ajajx请求）。**
+> 上面这个解释不是人能听懂的，**简单来说就是允许action是一个函数(同步的action都是一个对象)，然后我们可以在该函数中定义相应的异步操作（像定时器或ajax请求）。**
 >
 > 上面说的什么柯里化函数是指我们的action creator函数是一个高阶函数。这个高阶函数返回的函数作为我们的action。
 

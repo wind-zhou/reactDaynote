@@ -47,8 +47,6 @@ npm install react-redux -D
 
 ## 核心API
 
-
-
 ### 1. Provider：
 
 **让所有组件都可以得到state数据**
@@ -302,9 +300,6 @@ function mapDisPatchToProps(dispatch) {
 >export default ReactCms;
 >
 >```
->
->
->
 
 
 

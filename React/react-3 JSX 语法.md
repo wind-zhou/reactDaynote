@@ -1,5 +1,3 @@
-
-
 # lesson-3 JSX 语法
 
 ## JSX简介

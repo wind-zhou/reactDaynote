@@ -110,7 +110,7 @@ class UnControlCom extends React.Component {
             <form  onSubmit={this.changeData}>
                 <label > 年龄：<input    ref={this.ageRef}  type="text"/></label>
  {/* 为什么上上面标签内要写定义ref的值呢？因为你不用ref回去不到这个input的值呀！，用e.targrt是不好使了 ，因为绑定在了form身上*/}
- {/* 之前受控组件，在input本身绑定了个onchange事件*，所以那个可以使用e.target获取/}
+ {/* 之前受控组件，在input本身绑定了个onchange事件*，所以那个可以使用e.target获取*/}
 
                 <input type="submit" value="提交" />
             </form>
@@ -183,6 +183,8 @@ class HighFun extends React.Component {
 }
 
 export default HighFun
+
+
 ```
 
 
@@ -262,5 +264,5 @@ export default HighFun
 >
 >​	（**注意：此时箭头函数体内调用了this.handleData方法，所谓的两个参数同时传入，是相对于this.handleData来	说**）
 >
->
+>b
 
